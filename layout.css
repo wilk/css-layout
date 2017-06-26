@@ -1,0 +1,68 @@
+/*
+ RECAP:
+
+ - CSS grids are great for building the bigger picture. They makes it really easy to manage the layout of the page, and can even handle more unorthodox and asymmetrical designs.
+ - Flexbox is great at aligning the content inside elements. Use flex to position the smaller details of a design.
+ - Use CSS grids for 2D layouts (rows AND columns).
+ - Flexbox works better in one dimension only (rows OR columns).
+ - There is no reason to use only CSS grids or only flexbox. Learn both and use them together.
+ */
+
+.container {
+    display: grid;
+
+    /*  Define the size and number of columns in our grid.
+    The fr unit works similar to flex:
+    fr columns will share the free space in the row in proportion to their value.
+    We will have 2 columns - the first will be 3x the size of the second.  */
+    grid-template-columns: 3fr 1fr;
+
+    /*  Assign the grid areas we did earlier to specific places on the grid.
+        First row is all header.
+        Second row is shared between main and sidebar.
+        Last row is all footer.  */
+    /* the name is not associated to the class or tag name. it depends on the "grid-area" property definition */
+    grid-template-areas:
+            "header header"
+            "main sidebar"
+            "footer footer";
+
+    /*  The gutters between each grid cell will be 60 pixels. */
+    grid-gap: 60px;
+}
+
+header {
+    /* define the header area (it could be named as "head" or "sticazzi" as well */
+    grid-area: header;
+}
+.main {
+    grid-area: main;
+}
+.sidebar {
+    grid-area: sidebar;
+}
+footer {
+    grid-area: footer;
+}
+
+@media (max-width: 600px) {
+    .container {
+        /*  Redefine the grid into a single column layout. */
+        grid-template-columns: 1fr;
+        grid-template-areas:
+                "header"
+                "main"
+                "sidebar"
+                "footer";
+    }
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav {
+    display: flex;
+    align-items: baseline;
+}
